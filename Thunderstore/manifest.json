@@ -1,0 +1,9 @@
+{
+    "name": "LifetimeCruiserWarranty",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/33mamaster/LC-LifetimeCruiserWarranty/",
+    "description": "This mod allows all future re-purchasing of the Company Cruiser to be covered by the warranty.",
+    "dependencies": [
+        "BepInEx-BepInExPack-5.4.2100"
+    ]
+}
