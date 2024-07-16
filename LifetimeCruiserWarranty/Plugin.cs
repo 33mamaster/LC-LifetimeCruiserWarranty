@@ -29,6 +29,9 @@ namespace LifetimeCruiserWarranty
             Logger = base.Logger;
             Logger.LogInfo($"Mod {modName} is loaded!");
 
+            config = Config;
+            LifetimeCruiserWarranty.Config.Load();
+
             harmony.PatchAll();
         }
     }
