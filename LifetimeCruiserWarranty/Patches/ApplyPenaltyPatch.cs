@@ -17,7 +17,6 @@ namespace LifetimeCruiserWarranty.Patches
         [HarmonyPrefix]
         private static void DespawnPropsAtEndOfRoundPatch()
         {
-            Plugin.Logger.LogInfo("Start of File");
             if (Config.applyPenalty.Value)
             {
                 Terminal terminal = Object.FindObjectOfType<Terminal>();

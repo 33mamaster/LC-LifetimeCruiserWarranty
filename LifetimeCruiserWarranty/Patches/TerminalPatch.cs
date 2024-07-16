@@ -9,7 +9,7 @@ using HarmonyLib;
 namespace LifetimeCruiserWarranty.Patches
 {
 	[HarmonyPatch(typeof(Terminal))]
-    internal class BuyVehiclePatch
+    internal class TerminalPatch
     {
         [HarmonyPatch("BuyVehicleServerRpc")]
         [HarmonyPostfix]
