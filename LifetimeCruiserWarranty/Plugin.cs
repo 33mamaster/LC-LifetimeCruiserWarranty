@@ -10,7 +10,7 @@ namespace LifetimeCruiserWarranty
     {
         private const string modGUID = "33mamaster.LifetimeCruiserWarranty";
         private const string modName = "Lifetime Cruiser Warranty";
-        private const string modVersion = "1.0.0";
+        private const string modVersion = "1.1.0";
 
         public static ConfigFile config;
         internal static new ManualLogSource Logger;
