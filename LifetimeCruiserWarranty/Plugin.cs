@@ -2,6 +2,7 @@
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
+using LifetimeCruiserWarranty.Patches;
 
 namespace LifetimeCruiserWarranty
 {
@@ -18,6 +19,9 @@ namespace LifetimeCruiserWarranty
         private readonly Harmony harmony = new Harmony(modGUID);
 
         private static Plugin Instance;
+
+        internal static bool isVehicleLeftBehind = false;
+        internal static int due = 0;
 
         void Awake()
         {
