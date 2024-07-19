@@ -34,7 +34,6 @@ namespace LifetimeCruiserWarranty.Patches
             // Locate the sequence of instructions to insert before
             for (int i = 0; i < codes.Count - 3; i++)
             {
-                
                 if (codes[i].opcode == OpCodes.Ldloc_1 &&
                     codes[i + 1].opcode == OpCodes.Ldarg_0 &&
                     codes[i + 2].opcode == OpCodes.Ldfld &&
@@ -47,11 +46,21 @@ namespace LifetimeCruiserWarranty.Patches
                     {
                         // Call DisplayPenalty method
                         new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(StartOfRoundTranspiler), nameof(DisplayPenalty))),
+                        
+                        //// Set state to 6 (or an appropriate unique state number)
+                        //new CodeInstruction(OpCodes.Ldarg_0),
+                        //new CodeInstruction(OpCodes.Ldc_I4, 999), // Choosing a state number which is likely unused
+                        //new CodeInstruction(OpCodes.Stfld, AccessTools.Field(typeof(StartOfRound).GetNestedType("<EndOfGame>d__278", BindingFlags.NonPublic), "<>1__state")),
+
                         // Insert a yield return new WaitForSeconds(2f);
                         new CodeInstruction(OpCodes.Ldarg_0), // Load the "this" argument
                         new CodeInstruction(OpCodes.Ldc_R4, 4f), // Load the float value 4.0
                         new CodeInstruction(OpCodes.Newobj, AccessTools.Constructor(typeof(WaitForSeconds), new Type[] { typeof(float) })), // Create new WaitForSeconds object
-                        new CodeInstruction(OpCodes.Stfld, AccessTools.Field(typeof(StartOfRound).GetNestedType("<EndOfGame>d__278", BindingFlags.NonPublic), "<>2__current")) // Store it in the <>2__current field
+                        new CodeInstruction(OpCodes.Stfld, AccessTools.Field(typeof(StartOfRound).GetNestedType("<EndOfGame>d__278", BindingFlags.NonPublic), "<>2__current")), // Store it in the <>2__current 
+
+                        //// Return true to indicate that the coroutine should yield
+                        //new CodeInstruction(OpCodes.Ldc_I4_1), // Load constant 1 (true)
+                        //new CodeInstruction(OpCodes.Ret)
                     };
 
                     // Insert the new instructions at the identified position
@@ -60,7 +69,6 @@ namespace LifetimeCruiserWarranty.Patches
                     for (int j = i; j < codes.Count - 3; j++)
                     {
                         Plugin.Logger.LogInfo(codes[j]);
-
                     }
                     break;
                 }
