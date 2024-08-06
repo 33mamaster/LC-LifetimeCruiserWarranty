@@ -30,6 +30,7 @@ namespace LifetimeCruiserWarranty.Patches
         [HarmonyTranspiler]
         public static IEnumerable<CodeInstruction> TranspileEndOfGame(IEnumerable<CodeInstruction> instructions)
         {
+            Plugin.Logger.LogInfo("Running transpiler");
             var codes = new List<CodeInstruction>(instructions);
             // Locate the sequence of instructions to insert before
             for (int i = 0; i < codes.Count - 3; i++)
@@ -45,26 +46,11 @@ namespace LifetimeCruiserWarranty.Patches
                     List<CodeInstruction> newInstructions = new List<CodeInstruction>
                     {
                         // Call DisplayPenalty method
-                        new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(StartOfRoundTranspiler), nameof(DisplayPenalty))),
-                        
-                        //// Set state
-                        //new CodeInstruction(OpCodes.Ldarg_0),
-                        //new CodeInstruction(OpCodes.Ldc_I4, 999), // Choosing a state number which is likely unused
-                        //new CodeInstruction(OpCodes.Stfld, AccessTools.Field(typeof(StartOfRound).GetNestedType("<EndOfGame>d__278", BindingFlags.NonPublic), "<>1__state")),
-
-                        // Insert a yield return new WaitForSeconds(2f);
-                        new CodeInstruction(OpCodes.Ldarg_0), // Load the "this" argument
-                        new CodeInstruction(OpCodes.Ldc_R4, 4f), // Load the float value 4.0
-                        new CodeInstruction(OpCodes.Newobj, AccessTools.Constructor(typeof(WaitForSeconds), new Type[] { typeof(float) })), // Create new WaitForSeconds object
-                        new CodeInstruction(OpCodes.Stfld, AccessTools.Field(typeof(StartOfRound).GetNestedType("<EndOfGame>d__278", BindingFlags.NonPublic), "<>2__current")), // Store it in the <>2__current 
-
-                        //// Return true to indicate that the coroutine should yield
-                        new CodeInstruction(OpCodes.Ldc_I4_1), // Load constant 1 (true)
-                        new CodeInstruction(OpCodes.Ret)
+                        new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(StartOfRoundTranspiler), nameof(DisplayPenaltyWrapper))),
                     };
 
                     // Insert the new instructions at the identified position
-                    codes.InsertRange(i + 1, newInstructions);  // Unsure if +1 here is correct.
+                    codes.InsertRange(i, newInstructions);
 
                     for (int j = i; j < codes.Count - 3; j++)
                     {
@@ -76,15 +62,26 @@ namespace LifetimeCruiserWarranty.Patches
 
             return codes.AsEnumerable();
         }
-    
 
-        private static void DisplayPenalty()
+
+        private static void DisplayPenaltyWrapper()
         {
             Plugin.Logger.LogInfo("Display Penalty Function");
+            if (Plugin.isVehicleLeftBehind)
+            {
+                HUDManager.Instance.StartCoroutine(DisplayAlert());
+            }
+        }
+
+        private static IEnumerator DisplayAlert()
+        {
+
+            yield return (object)new WaitForSeconds((float)4f);
+
             // Display Punishment
-            HUDManager.Instance.endgameStatsAnimator.SetTrigger("displayPenalty");
-            HUDManager.Instance.statsUIElements.penaltyAddition.text = $"Company Cruiser was left behind";
-            HUDManager.Instance.statsUIElements.penaltyTotal.text = $"DUE: ${Plugin.due}";
+            HUDManager.Instance.DisplayTip("Cruiser Lost", $"The Company Cruiser was lost.\nFINES DUE: ${Plugin.due}", true, false, "LC_Warning1");
+
+            yield return (object)new WaitForSeconds((float)4f);
         }
     }
 }

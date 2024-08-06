@@ -17,6 +17,7 @@ namespace LifetimeCruiserWarranty.Patches
         [HarmonyPrefix]
         private static void DespawnPropsAtEndOfRoundPatch()
         {
+            Plugin.isVehicleLeftBehind = false;
             if (Config.applyPenalty.Value)
             {
                 Terminal terminal = Object.FindObjectOfType<Terminal>();
