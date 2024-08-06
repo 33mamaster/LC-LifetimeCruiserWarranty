@@ -81,7 +81,7 @@ namespace LifetimeCruiserWarranty.Patches
             // Display Punishment
             HUDManager.Instance.DisplayTip("Cruiser Lost", $"The Company Cruiser was lost.\nFINES DUE: ${Plugin.due}", true, false, "LC_Warning1");
 
-            yield return (object)new WaitForSeconds((float)4f);
+            yield return (object)new WaitForSeconds((float)3f);
         }
     }
 }
