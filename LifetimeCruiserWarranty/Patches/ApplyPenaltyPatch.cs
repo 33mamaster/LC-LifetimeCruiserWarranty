@@ -37,7 +37,13 @@ namespace LifetimeCruiserWarranty.Patches
 
                             // Deduct social credit score
                             Plugin.Logger.LogInfo($"Credits: {terminal.groupCredits}");
-                            terminal.groupCredits -= (int)((float)groupCredits * 0.2f);
+                            if (Config.isPercentagePenalty.Value)
+                            {
+                                terminal.groupCredits -= (int)((float)groupCredits * Config.percentagePenaltyAmount.Value);
+                            } else
+                            {
+                                terminal.groupCredits -= Config.flatPenaltyAmount.Value;
+                            }
                             Plugin.Logger.LogInfo($"Credits after: {terminal.groupCredits}");
                             Plugin.due = groupCredits - terminal.groupCredits;
                         }
