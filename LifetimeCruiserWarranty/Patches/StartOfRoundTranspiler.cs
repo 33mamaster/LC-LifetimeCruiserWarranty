@@ -30,7 +30,6 @@ namespace LifetimeCruiserWarranty.Patches
         [HarmonyTranspiler]
         public static IEnumerable<CodeInstruction> TranspileEndOfGame(IEnumerable<CodeInstruction> instructions)
         {
-            Plugin.Logger.LogInfo("Running transpiler");
             var codes = new List<CodeInstruction>(instructions);
             // Locate the sequence of instructions to insert before
             for (int i = 0; i < codes.Count - 3; i++)
@@ -50,12 +49,7 @@ namespace LifetimeCruiserWarranty.Patches
                     };
 
                     // Insert the new instructions at the identified position
-                    codes.InsertRange(i, newInstructions);
-
-                    for (int j = i; j < codes.Count - 3; j++)
-                    {
-                        Plugin.Logger.LogInfo(codes[j]);
-                    }
+                    codes.InsertRange(i + 4, newInstructions);
                     break;
                 }
             }
