@@ -13,4 +13,9 @@
  - Punish players with a credit penalty if the Company Cruiser is destroyed or left behind.
 	- This acts very similar to the penalty you recieve from dead crewmates.
 	- Default: `Enabled`
+ - Make the credit penalty percentage or flat rate based.
+	- Default: `Percentage Penalty`
+ - Set the penalty to be applied.
+	- Default Percentage: `20% (Same as default single body unrecovered)`
+	- Default Fixed Rate: `150`
  

@@ -1,4 +1,7 @@
 # Changelog
+## v1.3.0
+- Added configs for fixed and percentage based penalties.
+- Fixed a bug where the UI would only display if a player died in the round.
 ## v1.2.0
 - Used Tips UI as a work-around for UI bug cutting off early.
 ## v1.1.1
