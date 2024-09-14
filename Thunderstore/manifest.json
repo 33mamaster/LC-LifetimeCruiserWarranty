@@ -1,6 +1,6 @@
 {
     "name": "LifetimeCruiserWarranty",
-    "version_number": "1.3.0",
+    "version_number": "1.4.0",
     "website_url": "https://github.com/33mamaster/LC-LifetimeCruiserWarranty/",
     "description": "This mod allows all future re-purchasing of the Company Cruiser to be covered by the warranty.",
     "dependencies": [
