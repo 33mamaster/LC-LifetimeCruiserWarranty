@@ -3,7 +3,8 @@
 
  This mod aims to treat the cruiser as a ship upgrade instead of an item.
 
- Create a Github issue or ping me (name is set as 33) in the modding discord if you find a bug.
+ Create a Github issue if you find a bug or have feature requests.
+ Alternatively, ping me (name is set as 33) in the modding discord, preferably within the "Lifetime Cruiser Warranty" Mod release forum. 
  
  ## Features
  - Allows all future re-purchasing of the Company Cruiser to be covered by the warranty.
