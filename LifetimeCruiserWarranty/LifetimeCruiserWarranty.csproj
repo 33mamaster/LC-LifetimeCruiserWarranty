@@ -96,7 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Patches\StartOfRoundTranspiler.cs" />
+    <Compile Include="Patches\StartOfRoundPatch.cs" />
     <Compile Include="Patches\ApplyPenaltyPatch.cs" />
     <Compile Include="Patches\TerminalPatch.cs" />
     <Compile Include="Config.cs" />
